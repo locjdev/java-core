@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public enum PositionName {
+public enum PositionName {
+    DEV, TEST, SCRUM_MASTER, PM
 }
