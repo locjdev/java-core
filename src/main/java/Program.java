@@ -12,9 +12,9 @@ public class Program {
         Position positon_03 = new Position(3, PositionName.SCRUM_MASTER);
         System.out.println("positon_01 = " + positon_01);
 
-        Account account_01 = new Account(1, "account1@gmail.com", "account01", "Nguyen van A", 1, 1, LocalDate.now());
-        Account account_02 = new Account(2, "account2@gmail.com", "account02", "Nguyen van B", 2, 2, LocalDate.now());
-        Account account_03 = new Account(3, "account3@gmail.com", "account03", "Nguyen van C", 3, 3, LocalDate.now());
+        Account account_01 = new Account(1, "account1@gmail.com", "account01", "Nguyen van A", department_01, positon_01, LocalDate.now());
+        Account account_02 = new Account(2, "account2@gmail.com", "account02", "Nguyen van B", department_02, positon_02, LocalDate.now());
+        Account account_03 = new Account(3, "account3@gmail.com", "account03", "Nguyen van C", department_03, positon_03, LocalDate.now());
         System.out.println("account_01 = " + account_01);
 
         Group group_01 = new Group(1, "group_01", 1, LocalDate.now());
