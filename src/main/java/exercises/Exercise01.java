@@ -81,13 +81,13 @@ public class Exercise01 {
         }
     }
 
-    private void checkDepartmentWithTenary(Account account) {
+    private void checkDepartmentByTenary(Account account) {
         System.out.println(account == null ? "Account không tồn tại" :
                 account.getDepartment() == null ? "Nhân viên " + account.getFullname() + " chưa có phòng ban" :
                         "Phòng ban của nhân viên " + account.getFullname() + " là: " + account.getDepartment().getDepartmentName());
     }
 
-    private void checkGroup(Account account) {
+    private void checkGroupBySwitchCase(Account account) {
         if (account == null) {
             System.out.println("Account không tồn tại");
         } else {
@@ -119,11 +119,215 @@ public class Exercise01 {
         }
     }
 
+    private void checkGroupByIf(Account account) {
+        if (account == null) {
+            System.out.println("Account không tồn tại");
+        } else {
+            int countGroup = 0;
+            String groupNames = "";
+            for (int i = 0; i < groupAccounts.size(); i++) {
+                if (groupAccounts.get(i).getAccount().getAccountID() == account.getAccountID()) {
+                    countGroup++;
+                    for (Group group : groups)
+                        if (group.getGroupID() == groupAccounts.get(i).getGroup().getGroupID())
+                            groupNames += group.getGroupName() + " ";
+                }
+            }
+            if (countGroup == 0) {
+                System.out.println("Nhân viên " + account.getFullname() + " chưa có group");
+            } else if (countGroup == 1 || countGroup == 2) {
+                System.out.println("Group của nhân viên " + account.getFullname() + " là " + groupNames);
+            } else if (countGroup == 3) {
+                System.out.println("Nhân viên " + account.getFullname() + " là người quan trọng, tham gia nhiều group");
+            } else {
+                System.out.println("Nhân viên " + account.getFullname() + " là hóng chuyện, tham gia tất cả group");
+            }
+        }
+    }
+
+    private void checkPositionByIf(Account account) {
+        System.out.println(
+                account.getPosition() == null ? "Account không tồn tại" :
+                        account.getPosition().getPositionName() == PositionName.DEV ? account.getFullname() + " là Developer" : account.getFullname() + " không phải là Developer"
+        );
+    }
+
+    private void checkPositionBySwitchCase(Account account) {
+        if (account == null || account.getPosition() == null) {
+            System.out.println("Account không tồn tại");
+        } else {
+            switch (account.getPosition().getPositionName()) {
+                case DEV:
+                    System.out.println(account.getFullname() + " là Developer");
+                    break;
+                default:
+                    System.out.println(account.getFullname() + " không phải là Developer");
+                    break;
+            }
+        }
+    }
+
+    private void countAccountInGroup(Group group) {
+        int count = 0;
+        for (GroupAccount groupAccount : groupAccounts)
+            count += (group.getGroupID() == groupAccount.getGroup().getGroupID()) ? 1 : 0;
+
+        switch (count) {
+            case 1:
+                System.out.println("Nhóm " + group.getGroupName() + " có 1 thành viên");
+                break;
+            case 2:
+                System.out.println("Nhóm " + group.getGroupName() + " có 2 thành viên");
+                break;
+            case 3:
+                System.out.println("Nhóm " + group.getGroupName() + " có 3 thành viên");
+                break;
+            default:
+                System.out.println("Nhóm " + group.getGroupName() + " có nhiều thành viên");
+                break;
+        }
+    }
+
+    private void printAccount() {
+        for (Account account : accounts) {
+            if (account != null) {
+                String email = account.getEmail() != null ? account.getEmail() : "N/A";
+                String fullname = account.getFullname() != null ? account.getFullname() : "N/A";
+                String departmentName = (account.getDepartment() != null && account.getDepartment().getDepartmentName() != null) ? account.getDepartment().getDepartmentName() : "N/A";
+                System.out.println("Account[" + account.getAccountID() + "] | " + " Email: " + email + " | FullName: " + fullname + " | DepartmentName: " + departmentName);
+            }
+        }
+    }
+
+    private void printDepartment() {
+        for (Department department : departments) {
+            if (department != null) {
+                String departmentName = department.getDepartmentName() != null ? department.getDepartmentName() : "N/A";
+                System.out.println("Department[" + department.getDepartmentID() + "] | " + " DepartmentName: " + departmentName);
+            }
+        }
+    }
+
+    private void printAccountWithFomat() {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i) != null) {
+                System.out.println("Thông tin account thứ " + accounts.get(i).getAccountID() + " là:");
+                System.out.println(accounts.get(i).getEmail() != null ? "Email: " + accounts.get(i).getEmail() : "Email: N/A");
+                System.out.println(accounts.get(i).getFullname() != null ? "Full name: " + accounts.get(i).getFullname() : "Full name: N/A");
+                System.out.println((accounts.get(i).getDepartment() != null && accounts.get(i).getDepartment().getDepartmentName() != null) ? "Phòng ban: " + accounts.get(i).getDepartment().getDepartmentName() : "Phòng ban: N/A");
+                System.out.println("**********");
+            }
+        }
+    }
+
+    private void printDepartmentWithFomat() {
+        for (int i = 0; i < departments.size(); i++) {
+            if (departments.get(i) != null) {
+                System.out.println("Thông tin department thứ " + departments.get(i).getDepartmentID() + " là");
+                System.out.println("Id: " + departments.get(i).getDepartmentID());
+                System.out.println(departments.get(i).getDepartmentName() != null ? "Name:" + departments.get(i).getDepartmentName() : "Name: N/A");
+                System.out.println("**********");
+            }
+        }
+    }
+
+    private void printAllAccountsExceptSecond() {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i) != null && i!=1) {
+                System.out.println("Thông tin account thứ " + accounts.get(i).getAccountID() + " là:");
+                System.out.println(accounts.get(i).getEmail() != null ? "Email: " + accounts.get(i).getEmail() : "Email: N/A");
+                System.out.println(accounts.get(i).getFullname() != null ? "Full name: " + accounts.get(i).getFullname() : "Full name: N/A");
+                System.out.println((accounts.get(i).getDepartment() != null && accounts.get(i).getDepartment().getDepartmentName() != null) ? "Phòng ban: " + accounts.get(i).getDepartment().getDepartmentName() : "Phòng ban: N/A");
+                System.out.println("**********");
+            }
+        }
+    }
+
+    private void printAccountsWithIDLessThan4() {
+        for (int i = 0; i < departments.size(); i++) {
+            if (departments.get(i) != null) {
+                System.out.println("Thông tin department thứ " + departments.get(i).getDepartmentID() + " là");
+                System.out.println("Id: " + departments.get(i).getDepartmentID());
+                System.out.println(departments.get(i).getDepartmentName() != null ? "Name:" + departments.get(i).getDepartmentName() : "Name: N/A");
+                System.out.println("**********");
+            }
+
+        }
+    }
+
+    private void printEvenNumbersUpTo20(){
+        for (int i = 0; i <= 20; i++) {
+            if (i % 2 == 0) {
+                System.out.println(i);
+            }
+        }
+    }
+
+    private void printAllAccountsExceptSecondUsingWhile() {
+        int i = 0;
+        while (i < accounts.size()) {
+            if (i != 1) { // Bỏ qua account thứ 2 (index 1)
+                Account account = accounts.get(i);
+                if (account != null) {
+                    String email = account.getEmail() != null ? account.getEmail() : "N/A";
+                    String fullname = account.getFullname() != null ? account.getFullname() : "N/A";
+                    String departmentName = (account.getDepartment() != null && account.getDepartment().getDepartmentName() != null) ? account.getDepartment().getDepartmentName() : "N/A";
+
+                    System.out.println("Thông tin account thứ " + (i + 1) + " là:");
+                    System.out.println("Email: " + email);
+                    System.out.println("Full name: " + fullname);
+                    System.out.println("Phòng ban: " + departmentName);
+                    System.out.println("**********");
+                }
+            }
+            i++;
+        }
+    }
+
+    private void printAllAccountsExceptSecondUsingDoWhile() {
+        if (accounts.isEmpty()) {
+            return;
+        }
+
+        int i = 0;
+        do {
+            if (i != 1) { // Bỏ qua account thứ 2 (index 1)
+                Account account = accounts.get(i);
+                if (account != null) {
+                    String email = account.getEmail() != null ? account.getEmail() : "N/A";
+                    String fullname = account.getFullname() != null ? account.getFullname() : "N/A";
+                    String departmentName = (account.getDepartment() != null && account.getDepartment().getDepartmentName() != null) ? account.getDepartment().getDepartmentName() : "N/A";
+
+                    System.out.println("Thông tin account thứ " + (i + 1) + " là:");
+                    System.out.println("Email: " + email);
+                    System.out.println("Full name: " + fullname);
+                    System.out.println("Phòng ban: " + departmentName);
+                    System.out.println("**********");
+                }
+            }
+            i++;
+        } while (i < accounts.size());
+    }
+
+
+    private void printFirstTwoDepartments() {
+        for (int i = 0; i < 2; i++) {
+            if (departments.get(i) != null) {
+                System.out.println("Thông tin department thứ " + departments.get(i).getDepartmentID() + " là");
+                System.out.println("Id: " + departments.get(i).getDepartmentID());
+                System.out.println(departments.get(i).getDepartmentName() != null ? "Name:" + departments.get(i).getDepartmentName() : "Name: N/A");
+                System.out.println("**********");
+            }
+        }
+    }
+
     public static void main(String[] args) {
         // Insert values
         Exercise01 exercise01 = new Exercise01();
         exercise01.insertValues();
 
+        //IF
+        System.out.println("--- IF ---");
         //Question-01
         System.out.println("Question-01:");
         exercise01.checkDepartment(exercise01.accounts.get(1));
@@ -133,16 +337,101 @@ public class Exercise01 {
 
         //Question-02
         System.out.println("Question-02:");
-        exercise01.checkGroup(exercise01.accounts.get(0));
-        exercise01.checkGroup(exercise01.accounts.get(1));
-        exercise01.checkGroup(exercise01.accounts.get(2));
+        exercise01.checkGroupByIf(exercise01.accounts.get(0));
+        exercise01.checkGroupByIf(exercise01.accounts.get(1));
+        exercise01.checkGroupByIf(exercise01.accounts.get(2));
         System.out.println("-----------------------------------");
 
         //Question-03
         System.out.println("Question-03:");
-        exercise01.checkDepartmentWithTenary(exercise01.accounts.get(1));
-        exercise01.checkDepartmentWithTenary(exercise01.accounts.get(2));
-        exercise01.checkDepartmentWithTenary(exercise01.accounts.get(3));
+        exercise01.checkDepartmentByTenary(exercise01.accounts.get(1));
+        exercise01.checkDepartmentByTenary(exercise01.accounts.get(2));
+        exercise01.checkDepartmentByTenary(exercise01.accounts.get(3));
         System.out.println("-----------------------------------");
+
+        //Question-04
+        System.out.println("Question-04:");
+        exercise01.checkPositionByIf(exercise01.accounts.get(1));
+        exercise01.checkPositionByIf(exercise01.accounts.get(0));
+        System.out.println("-----------------------------------");
+
+        // SWITCH CASE
+        System.out.println("--- SWITCH CASE ---");
+        //Question-05
+        System.out.println("Question-05:");
+        exercise01.countAccountInGroup(exercise01.groups.get(0));
+        exercise01.countAccountInGroup(exercise01.groups.get(1));
+        exercise01.countAccountInGroup(exercise01.groups.get(2));
+        System.out.println("-----------------------------------");
+
+        //Question-06
+        System.out.println("Question-06:");
+        exercise01.checkGroupBySwitchCase(exercise01.accounts.get(0));
+        exercise01.checkGroupBySwitchCase(exercise01.accounts.get(1));
+        exercise01.checkGroupBySwitchCase(exercise01.accounts.get(2));
+        System.out.println("-----------------------------------");
+
+        //Question-07
+        System.out.println("Question-07:");
+        exercise01.checkPositionBySwitchCase(exercise01.accounts.get(1));
+        exercise01.checkPositionBySwitchCase(exercise01.accounts.get(0));
+        System.out.println("-----------------------------------");
+
+        // FOR EACH
+        System.out.println("--- FOREACH ---");
+
+        //Question-08
+        System.out.println("Question-08:");
+        exercise01.printAccount();
+        System.out.println("-----------------------------------");
+
+        //Question-09
+        System.out.println("Question-09:");
+        exercise01.printDepartment();
+        System.out.println("-----------------------------------");
+
+        // FOR
+        System.out.println("--- FOR ---");
+
+        //Question-10
+        System.out.println("Question-10:");
+        exercise01.printAccountWithFomat();
+        System.out.println("-----------------------------------");
+
+        //Question-11
+        System.out.println("Question-11:");
+        exercise01.printDepartmentWithFomat();
+        System.out.println("-----------------------------------");
+
+        //Question-12
+        System.out.println("Question-12:");
+        exercise01.printFirstTwoDepartments();
+        System.out.println("-----------------------------------");
+
+        //Question-13
+        System.out.println("Question-13:");
+        exercise01.printAllAccountsExceptSecond();
+        System.out.println("-----------------------------------");
+
+        //Question-14
+        System.out.println("Question-14:");
+        exercise01.printAccountsWithIDLessThan4();
+        System.out.println("-----------------------------------");
+
+        //Question-15
+        System.out.println("Question-15:");
+        exercise01.printEvenNumbersUpTo20();
+        System.out.println("-----------------------------------");
+
+        //Question-16
+        System.out.println("Question-16:");
+        exercise01.printAllAccountsExceptSecondUsingWhile();
+        System.out.println("-----------------------------------");
+
+        //Question-17
+        System.out.println("Question-17:");
+        exercise01.printAllAccountsExceptSecondUsingDoWhile();
+        System.out.println("-----------------------------------");
+
     }
 }

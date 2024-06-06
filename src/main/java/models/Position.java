@@ -9,6 +9,14 @@ public class Position {
           this.positionName = positionName;
      }
 
+     public int getPositionID() {
+          return positionID;
+     }
+
+     public PositionName getPositionName() {
+          return positionName;
+     }
+
      @Override
      public String toString() {
           return "models.Position{" +
