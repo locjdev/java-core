@@ -52,7 +52,7 @@ public class Exercies2 {
         ArrayList<Position> positions = new ArrayList<>();
 
         departments.add(new Department(1, "Sale"));
-        departments.add(new Department(2, "Sale"));
+        departments.add(new Department(2, null));
         departments.add(new Department(3, "Marketing"));
 
         positions.add(new Position(1, PositionName.DEV));
@@ -60,15 +60,22 @@ public class Exercies2 {
         positions.add(new Position(3, PositionName.SCRUM_MASTER));
 
         accounts.add(new Account(1, "account1@gmail.com", "account01", "Nguyen van A", departments.get(0), positions.get(0), LocalDate.now()));
-        accounts.add(new Account(2, "account2@gmail.com", "account02", "Nguyen van B", null, positions.get(1), LocalDate.now()));
+        accounts.add(new Account(2, null, "account02", "Nguyen van B", null, positions.get(1), LocalDate.now()));
         accounts.add(new Account(3, "account3@gmail.com", "account03", "Nguyen van C", departments.get(2), positions.get(2), LocalDate.now()));
         accounts.add(null);
 
-        for (Account account : accounts){
-            System.out.printf("| Email |");
+        System.out.println("+--------------------+--------------------+--------------------+");
+        System.out.println("|        EMAIL       |      FULL NAME     |   DEPARTMENT NAME  |");
+        for (Account account : accounts) {
+            if (account != null) {
+                String email = account.getEmail() != null ? account.getEmail() : "N/A";
+                String fullName = account.getFullname() != null ? account.getFullname() : "N/A";
+                String departmentName = account.getDepartment() != null && account.getDepartment().getDepartmentName() != null
+                        ? account.getDepartment().getDepartmentName()
+                        : "N/A";
+                System.out.printf("| %18s | %18s | %18s |%n", email, fullName, departmentName);
+            }
         }
-
         System.out.println("--------------------");
-
     }
 }

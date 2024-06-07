@@ -9,6 +9,14 @@ public class CategoryQuestion {
         this.categoryName = categoryName;
     }
 
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
     @Override
     public String toString() {
         return "models.CategoryQuestion{" +
