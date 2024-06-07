@@ -5,7 +5,7 @@ import models.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Exercise01 {
+public class Exercise1 {
     private ArrayList<Account> accounts = new ArrayList<>();
     private ArrayList<Department> departments = new ArrayList<>();
     private ArrayList<Position> positions = new ArrayList<>();
@@ -323,58 +323,58 @@ public class Exercise01 {
 
     public static void main(String[] args) {
         // Insert values
-        Exercise01 exercise01 = new Exercise01();
-        exercise01.insertValues();
+        Exercise1 exercise1 = new Exercise1();
+        exercise1.insertValues();
 
         //IF
         System.out.println("--- IF ---");
         //Question-01
         System.out.println("Question-01:");
-        exercise01.checkDepartment(exercise01.accounts.get(1));
-        exercise01.checkDepartment(exercise01.accounts.get(3));
-        exercise01.checkDepartment(exercise01.accounts.get(2));
+        exercise1.checkDepartment( exercise1.accounts.get(1));
+        exercise1.checkDepartment( exercise1.accounts.get(3));
+        exercise1.checkDepartment( exercise1.accounts.get(2));
         System.out.println("-----------------------------------");
 
         //Question-02
         System.out.println("Question-02:");
-        exercise01.checkGroupByIf(exercise01.accounts.get(0));
-        exercise01.checkGroupByIf(exercise01.accounts.get(1));
-        exercise01.checkGroupByIf(exercise01.accounts.get(2));
+        exercise1.checkGroupByIf( exercise1.accounts.get(0));
+        exercise1.checkGroupByIf( exercise1.accounts.get(1));
+        exercise1.checkGroupByIf( exercise1.accounts.get(2));
         System.out.println("-----------------------------------");
 
         //Question-03
         System.out.println("Question-03:");
-        exercise01.checkDepartmentByTenary(exercise01.accounts.get(1));
-        exercise01.checkDepartmentByTenary(exercise01.accounts.get(2));
-        exercise01.checkDepartmentByTenary(exercise01.accounts.get(3));
+        exercise1.checkDepartmentByTenary( exercise1.accounts.get(1));
+        exercise1.checkDepartmentByTenary( exercise1.accounts.get(2));
+        exercise1.checkDepartmentByTenary( exercise1.accounts.get(3));
         System.out.println("-----------------------------------");
 
         //Question-04
         System.out.println("Question-04:");
-        exercise01.checkPositionByIf(exercise01.accounts.get(1));
-        exercise01.checkPositionByIf(exercise01.accounts.get(0));
+        exercise1.checkPositionByIf( exercise1.accounts.get(1));
+        exercise1.checkPositionByIf( exercise1.accounts.get(0));
         System.out.println("-----------------------------------");
 
         // SWITCH CASE
         System.out.println("--- SWITCH CASE ---");
         //Question-05
         System.out.println("Question-05:");
-        exercise01.countAccountInGroup(exercise01.groups.get(0));
-        exercise01.countAccountInGroup(exercise01.groups.get(1));
-        exercise01.countAccountInGroup(exercise01.groups.get(2));
+        exercise1.countAccountInGroup( exercise1.groups.get(0));
+        exercise1.countAccountInGroup( exercise1.groups.get(1));
+        exercise1.countAccountInGroup( exercise1.groups.get(2));
         System.out.println("-----------------------------------");
 
         //Question-06
         System.out.println("Question-06:");
-        exercise01.checkGroupBySwitchCase(exercise01.accounts.get(0));
-        exercise01.checkGroupBySwitchCase(exercise01.accounts.get(1));
-        exercise01.checkGroupBySwitchCase(exercise01.accounts.get(2));
+        exercise1.checkGroupBySwitchCase( exercise1.accounts.get(0));
+        exercise1.checkGroupBySwitchCase( exercise1.accounts.get(1));
+        exercise1.checkGroupBySwitchCase( exercise1.accounts.get(2));
         System.out.println("-----------------------------------");
 
         //Question-07
         System.out.println("Question-07:");
-        exercise01.checkPositionBySwitchCase(exercise01.accounts.get(1));
-        exercise01.checkPositionBySwitchCase(exercise01.accounts.get(0));
+        exercise1.checkPositionBySwitchCase( exercise1.accounts.get(1));
+        exercise1.checkPositionBySwitchCase( exercise1.accounts.get(0));
         System.out.println("-----------------------------------");
 
         // FOR EACH
@@ -382,12 +382,12 @@ public class Exercise01 {
 
         //Question-08
         System.out.println("Question-08:");
-        exercise01.printAccount();
+        exercise1.printAccount();
         System.out.println("-----------------------------------");
 
         //Question-09
         System.out.println("Question-09:");
-        exercise01.printDepartment();
+        exercise1.printDepartment();
         System.out.println("-----------------------------------");
 
         // FOR
@@ -395,42 +395,42 @@ public class Exercise01 {
 
         //Question-10
         System.out.println("Question-10:");
-        exercise01.printAccountWithFomat();
+        exercise1.printAccountWithFomat();
         System.out.println("-----------------------------------");
 
         //Question-11
         System.out.println("Question-11:");
-        exercise01.printDepartmentWithFomat();
+        exercise1.printDepartmentWithFomat();
         System.out.println("-----------------------------------");
 
         //Question-12
         System.out.println("Question-12:");
-        exercise01.printFirstTwoDepartments();
+        exercise1.printFirstTwoDepartments();
         System.out.println("-----------------------------------");
 
         //Question-13
         System.out.println("Question-13:");
-        exercise01.printAllAccountsExceptSecond();
+        exercise1.printAllAccountsExceptSecond();
         System.out.println("-----------------------------------");
 
         //Question-14
         System.out.println("Question-14:");
-        exercise01.printAccountsWithIDLessThan4();
+        exercise1.printAccountsWithIDLessThan4();
         System.out.println("-----------------------------------");
 
         //Question-15
         System.out.println("Question-15:");
-        exercise01.printEvenNumbersUpTo20();
+        exercise1.printEvenNumbersUpTo20();
         System.out.println("-----------------------------------");
 
         //Question-16
         System.out.println("Question-16:");
-        exercise01.printAllAccountsExceptSecondUsingWhile();
+        exercise1.printAllAccountsExceptSecondUsingWhile();
         System.out.println("-----------------------------------");
 
         //Question-17
         System.out.println("Question-17:");
-        exercise01.printAllAccountsExceptSecondUsingDoWhile();
+        exercise1.printAllAccountsExceptSecondUsingDoWhile();
         System.out.println("-----------------------------------");
 
     }
