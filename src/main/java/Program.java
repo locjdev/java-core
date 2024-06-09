@@ -7,6 +7,7 @@ public class Program {
 //        exercise04.question3();
 //        exercise04.question4();
 //        exercise04.question5();
-        exercise04.question6();
+//        exercise04.question6();
+
     }
 }

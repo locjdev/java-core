@@ -60,8 +60,12 @@ public class Exercise04 {
         System.out.println("Nhập họ và tên:");
         String fullName = scanner.nextLine();
 
-        String lastName = fullName.substring(0, fullName.indexOf(" "));
-        String firstName = fullName.lastIndexOf(" ");
-        System.out.println("Họ là: " + lastName+" "+firstName);
+        String lastName = fullName.substring(0, fullName.indexOf(" ")).trim();
+        String middleName = fullName.substring(fullName.indexOf(" "), fullName.lastIndexOf(" ")).trim();
+        String firstName = fullName.substring(fullName.lastIndexOf(" "), fullName.length()).trim();
+
+        System.out.println("Họ là: " + lastName);
+        System.out.println("Tên đệm là: " + middleName);
+        System.out.println("Tên là: " + firstName);
     }
 }
