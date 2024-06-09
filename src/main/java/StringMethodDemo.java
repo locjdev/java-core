@@ -16,7 +16,7 @@ public class StringMethodDemo {
         System.out.println("s.substring(5) = " + s.substring(5));
         System.out.println("s.toUpperCase() = " + s.toUpperCase());
         System.out.println("s.toLowerCase() = " + s.toLowerCase());
-        String words[] s.split(" ");
+        String words[] = s.split(" ");
         for (String word : words) {
             System.out.println("word = " + word);
         }
