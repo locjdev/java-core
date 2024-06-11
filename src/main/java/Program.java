@@ -28,9 +28,13 @@ public class Program {
 //        exercise04.question15("  I    am     developer  ");
 //        exercise04.question16("123 456 789 10",3);
 
-        System.out.print("Exercise-05 | ");
-        Exercise05 exercise05= new Exercise05();
-        exercise05.question6();
+//        System.out.print("Exercise-05 | ");
+//        Exercise05 exercise05= new Exercise05();
+//        exercise05.question6();
+
+
+        System.out.print("Extensive Exercise | ");
+        ExtensiveExercise extensiveExercise = new ExtensiveExercise();
 
     }
 }
