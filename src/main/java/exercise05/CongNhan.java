@@ -8,6 +8,14 @@ public class CongNhan extends CanBo {
         bac = bac;
     }
 
+    public int getBac() {
+        return bac;
+    }
+
+    public void setBac(int bac) {
+        this.bac = bac;
+    }
+
     @Override
     public String toString() {
         return "CongNhan{" +

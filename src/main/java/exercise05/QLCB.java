@@ -5,10 +5,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class QLCB {
-    private List<CanBo> dsCanBo = new ArrayList<>();
+    private static List<CanBo> dsCanBo = new ArrayList<>();
 
     public void themCanBo(CanBo canBo) {
         this.dsCanBo.add(canBo);
+    }
+
+    public void inDanhSachCanBo() {
+        for (CanBo canBo : dsCanBo) {
+            System.out.println("Họ tên: " + canBo.getHoTen() + ", Tuổi: " + canBo.getTuoi() + ", Giới tính: " + canBo.getGioiTinh());
+            if (canBo instanceof CongNhan) {
+                CongNhan congNhan = (CongNhan) canBo;
+                System.out.println("Công nhân, Bậc: " + congNhan.getBac());
+            } else if (canBo instanceof KySu) {
+                KySu kySu = (KySu) canBo;
+                System.out.println("Kỹ sư, Ngành đào tạo: " + kySu.getNganhDaoTao());
+            } else if (canBo instanceof NhanVien) {
+                NhanVien nhanVien = (NhanVien) canBo;
+                System.out.println("Nhân viên, Công việc: " + nhanVien.getCongViec());
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -17,9 +33,10 @@ public class QLCB {
 
         System.out.println("Nhập loại cán bộ (1 - Công nhân, 2 - Kỹ sư, 3 - Nhân viên): ");
         int type = scanner.nextInt();
-
+        if (type < 1 || type > 3) return;
+        scanner.nextLine();
         System.out.println("Nhập họ tên: ");
-        String hoTen = scanner.next();
+        String hoTen = scanner.nextLine();
 
         System.out.println("Nhập tuổi: ");
         int tuoi = scanner.nextInt();
@@ -53,5 +70,6 @@ public class QLCB {
         } else {
             System.out.println("Loại cán bộ không hợp lệ!");
         }
+        qlcb.inDanhSachCanBo();
     }
 }

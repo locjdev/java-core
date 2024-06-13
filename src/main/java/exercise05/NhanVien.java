@@ -8,6 +8,14 @@ public class NhanVien extends CanBo{
         this.congViec = congViec;
     }
 
+    public String getCongViec() {
+        return congViec;
+    }
+
+    public void setCongViec(String congViec) {
+        this.congViec = congViec;
+    }
+
     @Override
     public String toString() {
         return "NhanVien{" +

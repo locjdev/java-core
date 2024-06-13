@@ -8,6 +8,14 @@ public class KySu extends CanBo{
         this.nganhDaoTao = nganhDaoTao;
     }
 
+    public String getNganhDaoTao() {
+        return nganhDaoTao;
+    }
+
+    public void setNganhDaoTao(String nganhDaoTao) {
+        this.nganhDaoTao = nganhDaoTao;
+    }
+
     @Override
     public String toString() {
         return "KySu{" +
