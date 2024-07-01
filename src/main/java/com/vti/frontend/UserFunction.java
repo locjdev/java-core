@@ -5,6 +5,7 @@ import com.vti.repository.UserRepository;
 import com.vti.util.ScannerUtil;
 import lombok.AllArgsConstructor;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,27 +13,93 @@ import java.util.List;
 public class UserFunction {
     private UserRepository repository;
 
-    public void showMenu() throws SQLException {
+    public void showMenu() throws SQLException, IOException {
         while (true) {
-            System.out.println("1. Hiển thị danh sách user");
-            System.out.println("2. Thêm User");
-            System.out.println("3. Thoát chương trình");
-            System.out.println("Mời bạn chọn chức năng");
+            System.out.println("1. Đăng nhập");
+            System.out.println("2. Hiển thị danh sách user");
+            System.out.println("3. Tìm kiếm user theo id");
+            System.out.println("4. Thoát chương trình");
+            System.out.println("Mời bạn chọn chức năng:");
             int menu = ScannerUtil.inputInt();
             if (menu == 1) {
-                findAll();
+                findByEmailAndPassword();
             } else if (menu == 2) {
-                create();
+                findAll();
             } else if (menu == 3) {
-                System.out.println("Cảm ơn bạn đã sử dụng chương trình");
+                findById();
+            } else if (menu == 4) {
+                System.out.println("Cảm ơn bạn đã sử dụng chương trình!");
                 return;
             } else {
-                System.err.println("Vui lòng chọn đúng chức năng");
+                System.err.println("Vui lòng chọn đúng chức năng.");
             }
         }
     }
 
-    private void findAll() throws SQLException {
+    private void showEmployeeMenu() throws SQLException, IOException {
+        while (true) {
+            System.out.println("1. Hiển thị danh sách user");
+            System.out.println("2. Tìm kiếm user theo id");
+            System.out.println("3. Đăng xuất");
+            System.out.println("Mời bạn chọn chức năng:");
+            int menu = ScannerUtil.inputInt();
+            if (menu == 1) {
+                findAll();
+            } else if (menu == 2) {
+                findById();
+            } else if (menu == 3) {
+                System.out.println("Đăng xuất thành công!");
+                return;
+            } else {
+                System.err.println("Vui lòng chọn đúng chức năng.");
+            }
+        }
+    }
+
+    private void showAdminMenu() throws SQLException, IOException {
+        while (true) {
+            System.out.println("1. Hiển thị danh sách user");
+            System.out.println("2. Tìm kiếm user theo id");
+            System.out.println("3. Thêm user");
+            System.out.println("4. Xóa user theo id");
+            System.out.println("5. Đăng xuất");
+            System.out.println("Mời bạn chọn chức năng:");
+            int menu = ScannerUtil.inputInt();
+            if (menu == 1) {
+                findAll();
+            } else if (menu == 2) {
+                findById();
+            } else if (menu == 3) {
+                create();
+            } else if (menu == 4) {
+                deleteById();
+            } else if (menu == 5) {
+                System.out.println("Đăng xuất thành công!");
+                return;
+            } else {
+                System.err.println("Vui lòng chọn đúng chức năng.");
+            }
+        }
+    }
+
+    private void findById() throws SQLException, IOException {
+        System.out.println("Nhập vào id:");
+        int id = ScannerUtil.inputInt();
+        User user = repository.findById(id);
+        System.out.println("+------+-------------------------+-------------------------+");
+        System.out.printf("| %-4s | %-23s | %-23s |%n", "ID", "FULL NAME", "EMAIL");
+        System.out.println("+------+-------------------------+-------------------------+");
+
+        if (user == null) {
+            System.out.printf("| %-4s | %-23s | %-23s |%n", "NULL", "NULL", "NULL");
+            System.out.println("+------+-------------------------+-------------------------+");
+        } else {
+            System.out.printf("| %-4s | %-23s | %-23s |%n", user.getId(), user.getFullname(), user.getEmail());
+            System.out.println("+------+-------------------------+-------------------------+");
+        }
+    }
+
+    private void findAll() throws SQLException, IOException {
         List<User> users = repository.findAll();
         System.out.println("+------+-------------------------+-------------------------+");
         System.out.printf("| %-4s | %-23s | %-23s |%n", "ID", "FULL NAME", "EMAIL");
@@ -49,7 +116,7 @@ public class UserFunction {
         }
     }
 
-    public void create() throws SQLException {
+    public void create() throws SQLException, IOException {
         System.out.println("Mời bạn nhập vào thông tin user.");
         System.out.println("Nhập vào full name");
         String fullName = ScannerUtil.inputFullName();
@@ -57,5 +124,34 @@ public class UserFunction {
         String email = ScannerUtil.inputEmail();
         int result = repository.create(fullName, email);
         System.out.printf("Đã tạo thành công %d user.%n", result);
+    }
+
+    private void deleteById() throws SQLException, IOException {
+        System.out.println("Nhập vào id:");
+        int id = ScannerUtil.inputInt();
+        int result = repository.deleteById(id);
+        System.out.printf("Đã xóa thành công %d user.%n", result);
+    }
+
+    private void findByEmailAndPassword() throws SQLException, IOException {
+        System.out.println("Nhập vào email:");
+        String email = ScannerUtil.inputEmail();
+        System.out.println("Nhập vào password:");
+        String password = ScannerUtil.inputPassword();
+        User user = repository.findByEmailAndPassword(email, password);
+        if (user == null) {
+            System.err.println("Đăng nhập thất bại!");
+        } else {
+            User.Role role = user.getRole();
+            System.out.printf(
+                    "Đăng nhập thành công: %s - %s%n",
+                    user.getFullname(), role
+            );
+            if (role == User.Role.ADMIN) {
+                showAdminMenu();
+            } else if (role == User.Role.EMPLOYEE) {
+                showEmployeeMenu();
+            }
+        }
     }
 }
