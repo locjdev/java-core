@@ -14,13 +14,9 @@ public interface IUserRepository {
      * @throws SQLException Nếu xảy ra lỗi về SQL
      * @throws IOException  Nếu xảy ra lỗi cấu hình
      */
-    List<User> findAll() throws SQLException, IOException;
+    List<User> findEmployeeByProjectId(int projectId) throws SQLException, IOException;
 
-    int create(String fullname, String email) throws SQLException, IOException;
+    List<User> findAllManager() throws SQLException, IOException;
 
-    User findById(int id) throws SQLException, IOException;
-
-    int deleteById(int id) throws SQLException, IOException;
-
-    User findByEmailAndPassword(String email, String password) throws SQLException, IOException;
+    User findManagerByEmailAndPassword(String email, String password) throws SQLException, IOException;
 }

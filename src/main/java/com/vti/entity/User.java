@@ -13,9 +13,10 @@ public class User {
     private Role role;
     private String proSkill;
     private int expInYear;
+    private int projectId;
 
     public enum Role {
-        ADMIN, EMPLOYEE
+        MANAGER, EMPLOYEE
     }
 
     public void setRole(String role) {

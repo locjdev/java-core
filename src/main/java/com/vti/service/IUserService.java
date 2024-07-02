@@ -8,13 +8,9 @@ import java.util.List;
 
 // co the tu dong tao interface bang cach su dung refactory -> extract interface
 public interface IUserService {
-    List<User> findAll() ;
+    List<User> findEmployeeByProjectId(int projectId) ;
 
-    int create(String fullname, String email) ;
+    List<User> findAllManager() ;
 
-    User findById(int id) ;
-
-    int deleteById(int id) ;
-
-    User findByEmailAndPassword(String email, String password);
+    User findManagerByEmailAndPassword(String email, String password) ;
 }
