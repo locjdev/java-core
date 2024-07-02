@@ -16,40 +16,17 @@ public class UserFunction {
 
     public void showMenu() {
         while (true) {
-            System.out.println("1. Đăng nhập");
-            System.out.println("2. Hiển thị danh sách user");
-            System.out.println("3. Tìm kiếm user theo id");
-            System.out.println("4. Thoát chương trình");
+            System.out.println("1. Đăng nhập dành cho admin");
+            System.out.println("2. Tìm kiếm employee và manager theo project id");
+            System.out.println("3. Thoát chương trình");
             System.out.println("Mời bạn chọn chức năng:");
             int menu = ScannerUtil.inputInt();
             if (menu == 1) {
-                findByEmailAndPassword();
+                findAdminByEmailAndPassword();
             } else if (menu == 2) {
-                findAll();
+                findEmployeeAndMangerByProjectId();
             } else if (menu == 3) {
-                findById();
-            } else if (menu == 4) {
                 System.out.println("Cảm ơn bạn đã sử dụng chương trình!");
-                return;
-            } else {
-                System.err.println("Vui lòng chọn đúng chức năng.");
-            }
-        }
-    }
-
-    private void showEmployeeMenu() {
-        while (true) {
-            System.out.println("1. Hiển thị danh sách user");
-            System.out.println("2. Tìm kiếm user theo id");
-            System.out.println("3. Đăng xuất");
-            System.out.println("Mời bạn chọn chức năng:");
-            int menu = ScannerUtil.inputInt();
-            if (menu == 1) {
-                findAll();
-            } else if (menu == 2) {
-                findById();
-            } else if (menu == 3) {
-                System.out.println("Đăng xuất thành công!");
                 return;
             } else {
                 System.err.println("Vui lòng chọn đúng chức năng.");
@@ -59,22 +36,16 @@ public class UserFunction {
 
     private void showAdminMenu() {
         while (true) {
-            System.out.println("1. Hiển thị danh sách user");
-            System.out.println("2. Tìm kiếm user theo id");
-            System.out.println("3. Thêm user");
-            System.out.println("4. Xóa user theo id");
-            System.out.println("5. Đăng xuất");
+            System.out.println("1. Tìm kiếm employee và manager theo project id ");
+            System.out.println("2. Thêm user");
+            System.out.println("3. Đăng xuất");
             System.out.println("Mời bạn chọn chức năng:");
             int menu = ScannerUtil.inputInt();
             if (menu == 1) {
-                findAll();
+                findEmployeeAndMangerByProjectId();
             } else if (menu == 2) {
-                findById();
-            } else if (menu == 3) {
                 create();
-            } else if (menu == 4) {
-                deleteById();
-            } else if (menu == 5) {
+            } else if (menu == 3) {
                 System.out.println("Đăng xuất thành công!");
                 return;
             } else {
@@ -83,25 +54,10 @@ public class UserFunction {
         }
     }
 
-    private void findById() {
-        System.out.println("Nhập vào id:");
-        int id = ScannerUtil.inputInt();
-        User user = controller.findById(id);
-        System.out.println("+------+-------------------------+-------------------------+");
-        System.out.printf("| %-4s | %-23s | %-23s |%n", "ID", "FULL NAME", "EMAIL");
-        System.out.println("+------+-------------------------+-------------------------+");
-
-        if (user == null) {
-            System.out.printf("| %-4s | %-23s | %-23s |%n", "NULL", "NULL", "NULL");
-            System.out.println("+------+-------------------------+-------------------------+");
-        } else {
-            System.out.printf("| %-4s | %-23s | %-23s |%n", user.getId(), user.getFullname(), user.getEmail());
-            System.out.println("+------+-------------------------+-------------------------+");
-        }
-    }
-
-    private void findAll() {
-        List<User> users = controller.findAll();
+    private void findEmployeeAndMangerByProjectId() {
+        System.out.println("Nhập vào project id:");
+        int projectId = ScannerUtil.inputInt();
+        List<User> users = controller.findEmployeeAndMangerByProjectId(projectId);
         System.out.println("+------+-------------------------+-------------------------+");
         System.out.printf("| %-4s | %-23s | %-23s |%n", "ID", "FULL NAME", "EMAIL");
         System.out.println("+------+-------------------------+-------------------------+");
@@ -127,19 +83,13 @@ public class UserFunction {
         System.out.printf("Đã tạo thành công %d user.%n", result);
     }
 
-    private void deleteById() {
-        System.out.println("Nhập vào id:");
-        int id = ScannerUtil.inputInt();
-        int result = controller.deleteById(id);
-        System.out.printf("Đã xóa thành công %d user.%n", result);
-    }
 
-    private void findByEmailAndPassword() {
+    private void findAdminByEmailAndPassword() {
         System.out.println("Nhập vào email:");
         String email = ScannerUtil.inputEmail();
         System.out.println("Nhập vào password:");
         String password = ScannerUtil.inputPassword();
-        User user = controller.findByEmailAndPassword(email, password);
+        User user = controller.findAdminByEmailAndPassword(email, password);
         if (user == null) {
             System.err.println("Đăng nhập thất bại!");
         } else {
@@ -148,11 +98,7 @@ public class UserFunction {
                     "Đăng nhập thành công: %s - %s%n",
                     user.getFullname(), role
             );
-            if (role == User.Role.ADMIN) {
-                showAdminMenu();
-            } else if (role == User.Role.EMPLOYEE) {
-                showEmployeeMenu();
-            }
+            showAdminMenu();
         }
     }
 }
